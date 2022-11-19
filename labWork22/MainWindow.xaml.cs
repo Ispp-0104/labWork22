@@ -37,6 +37,9 @@ namespace labWork22
                 case "Task2":
                     new Task2Window().ShowDialog();
                     break;
+                case "Task3":
+                    new Task3Window().ShowDialog();
+                    break;
                 default:
                     break;
             }
