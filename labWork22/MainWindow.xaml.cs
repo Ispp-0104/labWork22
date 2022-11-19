@@ -28,44 +28,18 @@ namespace labWork22
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            using var context = new Ispp0104Context();
-            gameDataGrid.ItemsSource = context.Lw22Games.ToList();
-            logoComboBox.ItemsSource = GetLogos();
-        }
 
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            try
+            var button = (Button)sender;
+            switch (button.Content)
             {
-                using var context = new Ispp0104Context();
-                var game = gameDataGrid.SelectedItem as Lw22Game;
-                if (game == null)
-                {
-                    MessageBox.Show("Продукт не выбран!");
-                    return;
-                }
-                game.LogoFile = logoComboBox.SelectedItem.ToString();
-                context.Update(game);
-                context.SaveChanges();
+                case "Task1":
+                    new Task1Window().ShowDialog();
+                    break;
+                default:
+                    break;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return;
-            }
-            MessageBox.Show("Название логотипа добалвено!");
-        }
-        private static List<BitmapImage> GetLogos()
-        {
-            var info = new DirectoryInfo(@"C:\Temp\ispp01\mdk1101\labWork22\labWork22\games\logos\").EnumerateFiles();
-            List<BitmapImage> images = new();
-            foreach (var item in info)
-            {
-                images.Add(new BitmapImage(new Uri(@$"{item.Name}", UriKind.Relative)));
-            }
-            return images;
         }
     }
 }

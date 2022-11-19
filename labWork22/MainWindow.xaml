@@ -10,15 +10,20 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-    
-        <DataGrid x:Name="gameDataGrid"/>
-        <ComboBox x:Name="logoComboBox" Grid.Column="1"/>
-        <Button Content="Сохранить" Click="SaveButton_Click" Grid.Row="2" Grid.ColumnSpan="2"/>
+        <Button Content="Task1"/>
+        <Button Content="Task2" Grid.Row="1" Click="Button_Click"/>
+        <Button Content="Task3" Grid.Row="2" Click="Button_Click"/>
+        <Button Content="Task4" Grid.Row="3" Click="Button_Click"/>
+        <Button Content="Task5" Grid.Row="4" Click="Button_Click"/>
+        <Button Content="Task6" Grid.Row="5" Click="Button_Click"/>
     </Grid>
 </Window>
