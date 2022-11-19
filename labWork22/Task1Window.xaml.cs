@@ -4,16 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace labWork22
 {
@@ -31,7 +23,6 @@ namespace labWork22
         {
             using var context = new Ispp0104Context();
             gameDataGrid.ItemsSource = context.Lw22Games.ToList();
-            logoComboBox.ItemsSource = GetLogos();
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -56,15 +47,27 @@ namespace labWork22
             }
             MessageBox.Show("Название логотипа добалвено!");
         }
-        private static List<BitmapImage> GetLogos()
+        private static List<BitmapImage> GetLogos(string path)
         {
-            var info = new DirectoryInfo(@"C:\Temp\ispp01\mdk1101\labWork22\labWork22\games\logos\").EnumerateFiles();
+            var info = new DirectoryInfo(@$"{path}").EnumerateFiles();
             List<BitmapImage> images = new();
             foreach (var item in info)
             {
                 images.Add(new BitmapImage(new Uri(@$"{item.Name}", UriKind.Relative)));
             }
             return images;
+        }
+
+        private void GetImagePathButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                logoComboBox.ItemsSource = GetLogos(pathTextBox.Text);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
