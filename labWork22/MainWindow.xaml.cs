@@ -26,7 +26,6 @@ namespace labWork22
             InitializeComponent();
         }
 
-
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;
@@ -35,8 +34,8 @@ namespace labWork22
                 case "Task1":
                     new Task1Window().ShowDialog();
                     break;
-                case "Task3":
-                    new Task3Page().ShowDialog();
+                case "Task2":
+                    new Task2Window().ShowDialog();
                     break;
                 default:
                     break;

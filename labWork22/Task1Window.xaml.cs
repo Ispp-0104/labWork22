@@ -1,18 +1,21 @@
-﻿using labWork22.Data;
+﻿
+using labWork22.Data;
 using labWork22.Models;
-using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace labWork22
 {
     /// <summary>
     /// Логика взаимодействия для Task1Window.xaml
     /// </summary>
+   
     public partial class Task1Window : Window
     {
-        private FileInfo _fileData;
         public Task1Window()
         {
             InitializeComponent();
@@ -26,31 +29,47 @@ namespace labWork22
 
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            File.Copy(_fileData.FullName, @$"C:\Temp\ispp01\mdk1101\labWork22\labWork22\bin\Debug\net6.0-windows\Logos\{_fileData.Name}");
-            using var context = new Ispp0104Context();
-            var game = gameDataGrid.SelectedItem as Lw22Game;
-            if (game == null)
+            try
             {
-                MessageBox.Show("Игра не выбрана!");
+                using var context = new Ispp0104Context();
+                var game = gameDataGrid.SelectedItem as Lw22Game;
+                if (game == null)
+                {
+                    MessageBox.Show("Продукт не выбран!");
+                    return;
+                }
+                game.LogoFile = logoComboBox.SelectedItem.ToString();
+                context.Update(game);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
                 return;
             }
-            game.LogoFile = _fileData.Name;
-            context.Update(game);
-            context.SaveChanges();
-            MessageBox.Show("Успешно сохранено!");
+            MessageBox.Show("Название логотипа добалвено!");
+        }
+        private static List<BitmapImage> GetLogos(string path)
+        {
+            var info = new DirectoryInfo(@$"{path}").EnumerateFiles();
+            List<BitmapImage> images = new();
+            foreach (var item in info)
+            {
+                images.Add(new BitmapImage(new Uri(@$"{item.Name}", UriKind.Relative)));
+            }
+            return images;
         }
 
-        private void CheckAndSaveButton_Click(object sender, RoutedEventArgs e)
+        private void GetImagePathButton_Click(object sender, RoutedEventArgs e)
         {
-            GetFileData();
-            currentImage.Content = _fileData.Name;
-        }
-
-        private void GetFileData()
-        {
-            var fileDialog = new OpenFileDialog();
-            if (fileDialog.ShowDialog() == true)
-                _fileData = new FileInfo(fileDialog.FileName);
+            try
+            {
+                logoComboBox.ItemsSource = GetLogos(pathTextBox.Text);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

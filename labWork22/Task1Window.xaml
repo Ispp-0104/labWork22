@@ -7,10 +7,20 @@
         mc:Ignorable="d"
         Title="Task1Window" Height="450" Width="800"
         Loaded="Window_Loaded">
-    <StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
         <DataGrid x:Name="gameDataGrid"/>
-        <Button Content="Сохранить изображение" x:Name="checkAndSaveButton" Click="CheckAndSaveButton_Click"/>
+        <ComboBox x:Name="logoComboBox" Grid.Column="1"/>
         <Button Content="Сохранить" Click="SaveButton_Click" Grid.Row="2" Grid.ColumnSpan="2"/>
-        <Label Content="" x:Name="currentImage"/>
-    </StackPanel>
+        <Button Content="Сохранить изображения" Grid.ColumnSpan="1" Grid.Row="1" Click="GetImagePathButton_Click"/>
+        <TextBox x:Name="pathTextBox" Grid.Row="1" Grid.Column="1">C:\Temp\ispp01\mdk1101\labWork22\labWork22\games\logos</TextBox>
+    </Grid>
 </Window>

@@ -42,8 +42,6 @@ public partial class Ispp0104Context : DbContext
 
     public virtual DbSet<Lw22Photo> Lw22Photos { get; set; }
 
-    public virtual DbSet<Lw22User> Lw22Users { get; set; }
-
     public virtual DbSet<Manufacturer> Manufacturers { get; set; }
 
     public virtual DbSet<Order> Orders { get; set; }
@@ -63,6 +61,7 @@ public partial class Ispp0104Context : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=prserver\\SQLEXPRESS;Initial Catalog=ispp0104;User ID=ispp0104;Password=0104;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -311,27 +310,6 @@ public partial class Ispp0104Context : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.IdPhoto).ValueGeneratedOnAdd();
-        });
-
-        modelBuilder.Entity<Lw22User>(entity =>
-        {
-            entity.HasKey(e => e.IdUser);
-
-            entity.ToTable("LW22_Users");
-
-            entity.Property(e => e.Ip)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.LastEnter).HasColumnType("date");
-            entity.Property(e => e.Login)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.Name)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.Password)
-                .HasMaxLength(50)
-                .IsUnicode(false);
         });
 
         modelBuilder.Entity<Manufacturer>(entity =>
