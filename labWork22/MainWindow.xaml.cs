@@ -1,6 +1,4 @@
-﻿using labWork22_WPF_.Data;
-using labWork22_WPF_.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;

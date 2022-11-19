@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace labWork22_WPF_.Models;
+namespace labWork22.Models;
 
 public partial class Lw132User
 {

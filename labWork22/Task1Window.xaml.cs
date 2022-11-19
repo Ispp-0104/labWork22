@@ -1,14 +1,9 @@
-﻿using labWork22_WPF_.Data;
-using labWork22_WPF_.Models;
+﻿using labWork22.Data;
+using labWork22.Models;
 using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 
 namespace labWork22
 {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using labWork22_WPF_.Models;
+using labWork22.Models;
 
-namespace labWork22_WPF_.Data;
+namespace labWork22.Data;
 
 public partial class Ispp0104Context : DbContext
 {
@@ -40,6 +40,8 @@ public partial class Ispp0104Context : DbContext
 
     public virtual DbSet<Lw22Game> Lw22Games { get; set; }
 
+    public virtual DbSet<Lw22Photo> Lw22Photos { get; set; }
+
     public virtual DbSet<Manufacturer> Manufacturers { get; set; }
 
     public virtual DbSet<Order> Orders { get; set; }
@@ -59,8 +61,7 @@ public partial class Ispp0104Context : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=prserver\\SQLEXPRESS;Initial Catalog=ispp0104;User ID=ispp0104;Password=0104;TrustServerCertificate=True");
+        => optionsBuilder.UseSqlServer("Server=prserver\\SQLEXPRESS;Initial Catalog=ispp0104;User ID=ispp0104;Password=0104;TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -296,6 +297,18 @@ public partial class Ispp0104Context : DbContext
             entity.Property(e => e.Price)
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("price");
+        });
+
+        modelBuilder.Entity<Lw22Photo>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToTable("LW22_Photos");
+
+            entity.Property(e => e.FileName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.IdPhoto).ValueGeneratedOnAdd();
         });
 
         modelBuilder.Entity<Manufacturer>(entity =>
