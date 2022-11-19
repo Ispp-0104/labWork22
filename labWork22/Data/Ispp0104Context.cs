@@ -42,6 +42,8 @@ public partial class Ispp0104Context : DbContext
 
     public virtual DbSet<Lw22Photo> Lw22Photos { get; set; }
 
+    public virtual DbSet<Lw22User> Lw22Users { get; set; }
+
     public virtual DbSet<Manufacturer> Manufacturers { get; set; }
 
     public virtual DbSet<Order> Orders { get; set; }
@@ -309,6 +311,27 @@ public partial class Ispp0104Context : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.IdPhoto).ValueGeneratedOnAdd();
+        });
+
+        modelBuilder.Entity<Lw22User>(entity =>
+        {
+            entity.HasKey(e => e.IdUser);
+
+            entity.ToTable("LW22_Users");
+
+            entity.Property(e => e.Ip)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.LastEnter).HasColumnType("date");
+            entity.Property(e => e.Login)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Name)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Password)
+                .HasMaxLength(50)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<Manufacturer>(entity =>
